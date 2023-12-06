@@ -1,16 +1,17 @@
-document.querySelector('.check-access').addEventListener('click', checkAceess)
-
-function checkAceess() {
-    let height = document.querySelector('.H-in').value
-    let mass = document.querySelector('.M-in').value
-
-    let BMI = mass / (height / 100)**2
-
-    console.log(BMI)
-
-    let result = document.querySelector('.result')
-
-    BMI < 25.5 ? result.innerHTML = 'Вы можете участвовать' : result.innerHTML = 'Вы не можете участвовать'
+const checkAceess = (h, m) => {
+    if (+h && +m){
+        const bmi = m / (h / 100)**2
+        return bmi.toFixed(2) <= 25.50 ? 'Вы можете участвовать' : 'Вы не можете участвовать'
+    }
+    else return 'Некорректный ввод'
 }
+
+/*
+const height = prompt('Введите ваш рост')
+const mass = prompt('Введите ваш вес')
+alert(checkAceess(height, mass))
+*/
+
+console.log(checkAceess())
 
 module.exports = checkAceess

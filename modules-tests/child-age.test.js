@@ -1,12 +1,38 @@
-describe('checkAceess function', () => {
-    it('should return "Ребенок слишком мал" when age is less than 6', () => {
-        const age = 5;
-        const result = checkAceess(age);
-    expect(result).toBe('Ребенок слишком мал');
-    });
-    it('should return "Младшая группа" when age is between 6 and 10', () => {
-        const age = 8;
-        const result = checkAceess(age);
-    expect(result).toBe('Младшая группа');
-    });
-});
+const check = require('../modules/child-age')
+
+describe(
+    'Определяем возрастную группу',
+    () => {
+        const testCases = [
+            {
+                in: 0,
+                expected: 'Ребенок слишком мал'
+            },
+            {
+                in: 90,
+                expected: 'Взрослая группа'
+            },
+            {
+                in: -5,
+                expected: 'Возраст не может быть отрицательным'
+            },
+            {
+                in: 'test',
+                expected: 'Некорректный ввод'
+            },
+            {
+                in: ['hello', 'world'],
+                expected: 'Некорректный ввод'
+            },
+        ];
+        testCases.forEach(test => {
+            it(
+                `in : ${ test.in } \nexpected : ${ test.expected }`,
+                ()=>{
+                    const res = check(test.in);
+                    expect(res).toEqual(test.expected);
+                }
+            );
+        })
+    }
+)
