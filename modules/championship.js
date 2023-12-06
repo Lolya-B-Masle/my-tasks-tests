@@ -12,3 +12,5 @@ function checkAceess() {
 
     BMI < 25.5 ? result.innerHTML = 'Вы можете участвовать' : result.innerHTML = 'Вы не можете участвовать'
 }
+
+module.exports = checkAceess

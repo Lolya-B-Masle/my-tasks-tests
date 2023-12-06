@@ -1,29 +1,34 @@
 const matrix = [        // матрица
-    [3.3, 5.3, 2.8],
-    [3.6, 6.8, 9.2],
-    [5.3, 7.4, 5.3],
+    [1.3, 5.3, 0.8],
+    [3.6, 3.8, 9.2],
+    [3.8, 7.4, 4.3]
 ]
-
-let acum = 0      // Сумма элементов главной диагонали
-let acum_2 = 0    // Сумма элементов побочной диагонали
-const temp = []   // Массив элементов главной диагонали
 
 console.log('Матрица:\n')
 for(let i = 0; i < matrix.length; i++) { console.log(...matrix[i]) }  // Вывод матрицы на экран
+
+const diagSum = (mat) => {          // Вычисление суммы главной и побочной диагонали
+    let acum = 0      // Сумма элементов главной диагонали
+    let acum_2 = 0    // Сумма элементов побочной диагонали
+    const temp = []   // Массив элементов главной диагонали
+
+    for(let i = 0, j = 0; i < mat.length; i++, j++) {    
+        const otherIndex = mat.length - i - 1
     
-for(let i = 0, j = 0; i < matrix.length; i++, j++) {    // Вычисление суммы главной и побочной диагонали
-    const otherIndex = matrix.length - i - 1
-
-    if (i == j){
-        acum += matrix[i][j]
-        temp.push(matrix[i][j])
+        if (i == j){
+            acum += mat[i][j]
+            temp.push(mat[i][j])
+        }   
+    
+        i < 0 || otherIndex < 0 ? acum_2 += 0 : acum_2 += mat[i][otherIndex]
     }
-
-    i < 0 || otherIndex < 0 ? acum_2 += 0 : acum_2 += matrix[i][otherIndex]
+    
+    return `Сумма диагоналей: ${(acum + acum_2).toFixed(2)} --- Элементы главной диагонали: ${temp}`
+    //return {sum: (acum + acum_2).toFixed(2), mainElements: temp}
+    
 }
+    
+console.log(diagSum(matrix))
 
-let res = (acum + acum_2).toFixed(2)
 
-console.log('\nСумма элементов главной и побочной диагонали: ', res)
-
-console.log('\nЭлементы главной диагонали:', temp)
+module.exports = diagSum
